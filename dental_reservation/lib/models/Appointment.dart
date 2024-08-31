@@ -1,3 +1,6 @@
+import 'dentist.dart';
+import 'patient.dart';
+
 class Appointment{
     String id;
     String patientid;
@@ -7,9 +10,8 @@ class Appointment{
 
     Appointment(this.id, this.patientid, this.appointmentDate, this.status ='scheduled' );
 
-    @override
-    String toString() {
-        return 
-    }
-     'Appointment(ID: $id, Patient ID: $patientid, Date: $appointmentDate, Status: $status)';
+   @override
+   String toString() {
+    return 'Appointment(ID: $id) - ${patient.name} with Dr. ${dentist.name} on $appointmentDate';
+  }
 }
