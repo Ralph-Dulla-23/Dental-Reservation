@@ -1,37 +1,40 @@
-import 'package:dental_reservation/models/patient.dart';
+import 'package:riverpod_sample/models/patient.dart';
 import 'package:riverpod/riverpod.dart';
 
 class PatientService {
-    final Ref container;
-    final List<Patient> _patients = [];
+  final Ref container;
+  final List<Patient> _patients = [];
 
-    PatientService(this.container);
+  PatientService(this.container);
 
-    void addPatient(String id, String name, String email) {
-        final newPatient = Patient(id, name, email);
-        _patients.add(newPatient);
-        print('$name (Email $email) added');
+  void addPatient(final String id,String name, String email) {
+    final newPatient = Patient(id,name, email);
+    _patients.add(newPatient);
+    print('Name: $name, EmailL $email, Id: $id has been added.');
+  }
+
+  void viewPatient() {
+    if (_patients.isEmpty) {
+      print('No customers available.');
+    } else {
+      print('Customers: ');
+      for (var patient in _patients) {
+        print(patient);
+      }
     }
+  }
 
-    void viewPatients() {
-        if (_patients.isEmpty) {
-            print('No patients found');
-        } else {
-            print('Patients:');
-            for (var patient in _patients) {
-                print(patient)
-            }
-        }
-    }
+void removePatient(final String id) {
+  try {
+    final patientToRemove = _patients.firstWhere(
+      (patient) => patient.id == id,
+    );
+    _patients.remove(patientToRemove);
+    print('Patient removed successfully.');
+  } catch (e) {
+    print('Patient not found.');
+  }
+}
 
-    void removePatient(String id) {
-        final newRemovePatient = _patients.removeWhere((patient) => patient.id == id, orElse: () => null);
-        if (newRemovePatient != null) {
-            _patients.remove(newRemovePatient);
-            print('Patient removed successfully');
-        } else {
-            print('Patient not found');
-        }
-    }
-    List<Patient> get patients => _patients;
+  List<Patient> get patients => _patients;
 }

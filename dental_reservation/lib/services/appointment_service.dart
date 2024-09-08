@@ -1,37 +1,48 @@
-import 'package:dental_reservation/models/appointment.dart';
-import 'package:dental_reservation/models/dentist.dart';
+import 'package:collection/collection.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:riverpod_sample/global_providers.dart';
+import 'package:riverpod_sample/models/appointment.dart';
 
 class AppointmentService {
-    final Ref container;
-    final List<Appointment> _appointments = [];
-    
-    AppointmentService(this.container);
+  final Ref container;
+  List<Appointment> _appointments = [];
 
-    void addAppointment(String id, String patientId, String dentistId, DateTime appointmentDate) {
-        final newAppointment = Appointment(id, patientId, dentistId, appointmentDate);
-        _appointments.add(newAppointment);
-        print('Appointment added');
+  AppointmentService(this.container);
+
+  void addAppointment(String patientName, String dentistName, DateTime appointmentDate) {
+  final patientService = container.read(patientServiceProvider);
+  final dentistService = container.read(dentistServiceProvider);
+
+  final patient = patientService.patients.firstWhereOrNull(
+    (patient) => patient.name == patientName,
+  );
+
+  final dentist = dentistService.dentists.firstWhereOrNull(
+    (dentist) => dentist.name == dentistName,
+  );
+
+  if (patient != null && dentist != null) {
+    final newAppointment = Appointment(patient.id, patient.id, dentist, appointmentDate);
+    _appointments.add(newAppointment);
+    print('${patient.name} has made an appointment with ${dentist.name} on ${appointmentDate.toLocal()}');
+  } else {
+    print('Patient or dentist not found. Cannot make reservation.');
+  }
+}
+
+
+
+  void viewAppointments() {
+    if (_appointments.isEmpty) {
+      print('No appointments available.');
+    } else {
+      print('Appointments:');
+      for (var appointment in _appointments) {
+        print(appointment);  // This will call toString() method of Appointment
+      }
     }
+  }
 
-    void viewAppointments() {
-        if (_appointments.isEmpty) {
-            print('No appointments found');
-        } else {
-            print('Appointments:');
-            for (var appointment in _appointments) {
-                print(appointment)
-            }
-        }
-    }
 
-    void deleteAppointment(String id) {
-        final newDeleteAppointment = _appointments.removeWhere((appointment) => appointment.id == id, orElse: () => null);
-        if (newDeleteAppointment != null) {
-            _appointments.remove(newDeleteAppointment);
-            print('Appointment deleted successfully');  
-        } else {
-            print('Appointment not found');
-        }
-    List<Appointment> get appointments => _appointments;
+  List<Appointment> get appointments => _appointments;
 }

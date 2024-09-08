@@ -1,10 +1,10 @@
-class Patient{
-    final String id;
-    String name;
-    String email;
+class Patient {
+  final String id;
+  String name;
+  String email;
 
-    Patient(this.id, this.name, this.email);
+  Patient(this.id, this.name, this.email);
 
-    @override
-    String toString() => '$name (Email: $email)';
+  @override
+  String toString() => 'ID: $id, $name ,Email: $email';
 }
