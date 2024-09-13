@@ -10,7 +10,7 @@ class PatientService {
   void addPatient(final String id,String name, String email) {
     final newPatient = Patient(id,name, email);
     _patients.add(newPatient);
-    print('Name: $name, EmailL $email, Id: $id has been added.');
+    print('Name: $name\nEmail: $email\nId: $id \nhas been added.');
   }
 
   void viewPatient() {

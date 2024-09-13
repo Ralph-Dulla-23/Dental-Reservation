@@ -10,7 +10,7 @@ class DentistService {
     void addDentist(String id, String name) {
         final newDentist = Dentist(id, name);
         _dentists.add(newDentist);
-        print('ID: $id, Name:$name added');
+        print('ID: $id \nName:$name \nhas been added');
     }
 
     void viewDentists() {
