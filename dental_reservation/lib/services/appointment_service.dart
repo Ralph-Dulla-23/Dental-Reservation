@@ -9,20 +9,20 @@ class AppointmentService {
 
   AppointmentService(this.container);
 
-  void addAppointment(String patientName, String dentistName, DateTime appointmentDate) {
+  void addAppointment(String patientId, String dentistId, DateTime appointmentDate) {
   final patientService = container.read(patientServiceProvider);
   final dentistService = container.read(dentistServiceProvider);
 
   final patient = patientService.patients.firstWhereOrNull(
-    (patient) => patient.name == patientName,
+    (patient) => patient.id == patientId,
   );
 
   final dentist = dentistService.dentists.firstWhereOrNull(
-    (dentist) => dentist.name == dentistName,
+    (dentist) => dentist.id == dentistId,
   );
 
   if (patient != null && dentist != null) {
-    final newAppointment = Appointment(patient.id, patient.id, dentist, appointmentDate);
+    final newAppointment = Appointment(patient.id, dentist.id, dentist, appointmentDate);
     _appointments.add(newAppointment);
     print('${patient.name} has made an appointment with ${dentist.name} on ${appointmentDate.toLocal()}');
   } else {
@@ -43,6 +43,17 @@ class AppointmentService {
     }
   }
 
+  void removeAppointment(String id) {
+    try {
+      final appointmentToRemove = _appointments.firstWhere(
+        (appointment) => appointment.id == id,
+      );
+      _appointments.remove(appointmentToRemove);
+      print('Appointment removed successfully.');
+    } catch (e) {
+      print('Appointment not found.');
+    }
+  }
 
   List<Appointment> get appointments => _appointments;
 }

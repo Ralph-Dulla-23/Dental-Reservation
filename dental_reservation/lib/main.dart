@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:riverpod/riverpod.dart';
 import 'package:dental_reservation/global_providers.dart';
 
@@ -70,14 +69,14 @@ void main() {
         dentistService.viewDentists();
         break;
       case '6':
-        // print('Enter the Dentist ID to delete:');
-        // String? id = stdin.readLineSync();
-        // if (id != null && id.isNotEmpty) {
-        //   dentistService.removeDentist(id);
-        // } else {
-        //   print('Invalid input. Please try again.');
-        // }
-        // break;
+        print('Enter the Dentist ID to delete:');
+        String? id = stdin.readLineSync();
+        if (id != null && id.isNotEmpty) {
+          dentistService.removeDentist(id);
+        } else {
+          print('Invalid input. Please try again.');
+        }
+        break;
       case '7':
         print('Enter Patient ID:');
         String? patientId = stdin.readLineSync();
@@ -96,13 +95,13 @@ void main() {
         appointmentService.viewAppointments();
         break;
       case '9':
-        // print('Enter the Appointment ID to delete:');
-        // String? id = stdin.readLineSync();
-        // if (id != null && id.isNotEmpty) {
-        //   appointmentService.removeAppointment(id);
-        // } else {
-        //   print('Invalid input. Please try again.');
-        // }
+        print('Enter the Appointment ID to delete:');
+        String? id = stdin.readLineSync();
+        if (id != null && id.isNotEmpty) {
+          appointmentService.removeAppointment(id);
+        } else {
+          print('Invalid input. Please try again.');
+        }
         break;
       case '10':
         print('Exiting the application...');

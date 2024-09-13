@@ -24,7 +24,17 @@ class DentistService {
         }
     }
     
- 
+    void removeDentist(String id) {
+        try {
+            final dentistToRemove = _dentists.firstWhere(
+                (dentist) => dentist.id == id
+            );
+            _dentists.remove(dentistToRemove);
+            print('Dentist removed successfully');
+        } catch (e) {
+            print('Dentist not found');
+        }
+    }
 
     List<Dentist> get dentists => _dentists;
 }
