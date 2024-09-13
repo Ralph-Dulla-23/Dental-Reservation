@@ -1,4 +1,4 @@
-import 'package:riverpod_sample/models/dentist.dart';
+import 'package:dental_reservation/models/dentist.dart';
 import 'package:riverpod/riverpod.dart';
 
 class DentistService {
@@ -23,7 +23,7 @@ class DentistService {
             }
         }
     }
-
+    
  
 
     List<Dentist> get dentists => _dentists;

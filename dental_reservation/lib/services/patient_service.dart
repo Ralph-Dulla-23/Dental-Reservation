@@ -1,4 +1,4 @@
-import 'package:riverpod_sample/models/patient.dart';
+import 'package:dental_reservation/models/patient.dart';
 import 'package:riverpod/riverpod.dart';
 
 class PatientService {

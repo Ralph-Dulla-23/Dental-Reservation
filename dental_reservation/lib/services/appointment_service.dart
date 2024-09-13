@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_sample/global_providers.dart';
-import 'package:riverpod_sample/models/appointment.dart';
+import 'package:dental_reservation/global_providers.dart';
+import 'package:dental_reservation/models/appointment.dart';
 
 class AppointmentService {
   final Ref container;
